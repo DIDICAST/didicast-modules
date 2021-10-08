@@ -1,0 +1,1 @@
+{ "reject": ["@coreui/coreui", "@storybook/preset-create-react-app"] }

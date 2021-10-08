@@ -1,5 +1,7 @@
+import "../src/styles/commons.scss";
+
 export const parameters = {
-  actions: {argTypesRegex: '^on[A-Z].*'},
+  actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -9,9 +11,18 @@ export const parameters = {
   options: {
     storySort: {
       order: [
-        'Docs',
-        ['Intro', 'Install', 'Develop', 'Publish', 'Linters', 'Testing', 'Style options', 'Add documentation'],
-        'Example',
+        "Docs",
+        [
+          "Intro",
+          "Install",
+          "Develop",
+          "Publish",
+          "Linters",
+          "Testing",
+          "Style options",
+          "Add documentation",
+        ],
+        "Components",
       ],
     },
   },

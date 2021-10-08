@@ -1,0 +1,45 @@
+// Override default variables before the import
+$body-bg: #f9f9f9;
+$body-color: #333333;
+
+// $enable-shadows: false;
+
+$input-border-color: #d0d0d0;
+$input-focus-border-color: #06b0d7;
+
+$enable-gradients: true;
+$enable-responsive-font-sizes: true;
+$theme-colors: (
+  primary: #06b0d7,
+  secondary: #0b3351,
+  didicast-red: #ec1d24,
+  didicast-red-3: #f15756,
+  didicast-red-5: #f78282,
+  didicast-red-9: #fdd6d5,
+  didicast-blue: #06b0d7,
+  didicast-blue-3: #55bfdf,
+  didicast-blue-9: #d7f0f7,
+  didicast-deepblue: #0b3351,
+  didicast-deepblue-3: #3f5c74,
+  didicast-gray-0: #333333,
+  didicast-gray-3: #8b8b8b,
+  didicast-gray-5: #bdbdbd,
+  didicast-gray-9: #e4e4e4,
+  // white: #ffffff, 빌드 과정에서 중복 오류 발견
+  didicast-white: #ffffff,
+);
+
+$font-family-sans-serif: "Noto Sans", "Noto Sans KR", system-ui, -apple-system,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// Import Bootstrap and its default variables
+// @import "~bootstrap/scss/bootstrap.scss";
+
+$grid-breakpoints: (
+  xs: 0px,
+  sm: 1px,
+  md: 2px,
+  lg: 3px,
+  xl: 4px,
+);

@@ -1,0 +1,41 @@
+@import "./custom-bootstrap";
+@import "~@coreui/coreui/scss/coreui";
+
+$remInPx: 16;
+
+@function px2rem($pixel) {
+  @return $pixel / $remInPx * 1rem;
+}
+
+@include media-breakpoint-down(xs) {
+  html {
+    font-size: $remInPx / 360 * 100vw; //4.26vw;
+
+    &.smaller {
+      font-size: ($remInPx - 2) / 360 * 100vw;
+    }
+    &.bigger {
+      font-size: ($remInPx + 2) / 360 * 100vw;
+    }
+  }
+}
+
+.loading {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+
+  &,
+  & * {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &.in {
+    background-color: transparentize($color: $primary, $amount: 0.8);
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+  }
+}

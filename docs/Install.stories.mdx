@@ -1,29 +1,33 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from "@storybook/addon-docs";
 
 <Meta
   parameters={{
-    viewMode: 'docs',
+    viewMode: "docs",
     previewTabs: {
-      canvas: { hidden: true }
+      canvas: { hidden: true },
     },
   }}
-  title="Docs/Install" />
+  title="Docs/Install"
+/>
 
 # Install
 
-1. `npx` command installs most recent stable version of CRA from npm. `--template` parameter points to this template, note that `cra-template-` prefix is omitted.
+1. Node package를 설치합니다.
 
-    ```shell script
-    npx create-react-app %PROJECT_NAME% --template npm-library
-    ```
-    Or
-    ```shell script
-    yarn create react-app %PROJECT_NAME% --template npm-library
-    ```
-2. Start project.
+   ```shell script
+   yarn add @didi-santa/didicast-modules
+   ```
 
-    ```shell script
-    cd %PROJECT_NAME%
-    yarn start
-    ```
-3. Commit changes.
+2. 최상위 Sass 파일, 또는 가능한 상위 컴포넌트(일반적으로 router가 위치한 컴포넌트)에 스타일을 설치합니다. (Optional)
+
+   ```javascript
+   import "@didi-santa/didicast-modules/lib/styles/commons.scss";
+   ```
+
+   Or
+
+   ```scss
+   @import "~@didi-santa/didicast-modules/lib/styles/commons.scss";
+   ```
+
+3. 원하는 모듈을 사용합니다.
