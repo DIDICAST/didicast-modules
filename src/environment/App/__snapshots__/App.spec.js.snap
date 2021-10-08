@@ -5,27 +5,12 @@ exports[`environment > App renders without crashing 1`] = `
   <div
     class="container"
   >
-    <div
-      class="counter"
+    <button
+      class="d-flex justify-content-center align-items-center  makeStyles-button-1 btn btn-primary"
+      type="button"
     >
-      <h2
-        class="header"
-      >
-        Counter
-      </h2>
-      <button
-        class="button"
-        type="button"
-      >
-        Increment by one
-      </button>
-      <div>
-        Total value: 
-        <strong>
-          0
-        </strong>
-      </div>
-    </div>
+      Yeah~!
+    </button>
   </div>
 </DocumentFragment>
 `;
