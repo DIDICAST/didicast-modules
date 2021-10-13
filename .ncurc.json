@@ -1,1 +1,8 @@
-{ "reject": ["@coreui/coreui", "@storybook/preset-create-react-app"] }
+{
+  "reject": [
+    "@coreui/coreui",
+    "@storybook/preset-create-react-app",
+    "@typescript-eslint/parser",
+    "eslint"
+  ]
+}

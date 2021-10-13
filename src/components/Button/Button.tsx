@@ -42,6 +42,7 @@ export type Props = CButton & {
   IconComponent?: ReactNode;
   img?: string;
   label: ReactNode;
+  color?: "primary" | "secondary" | string;
 };
 export type Ref = CButton;
 
