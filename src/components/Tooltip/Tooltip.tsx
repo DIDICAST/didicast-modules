@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import { CTooltip } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
-import { forwardRef } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   qMarkOnCircle: {
@@ -25,33 +25,44 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export type Props = CTooltip & {
-  content?: any;
+type TooltipProps = CTooltip & {
+  content: ReactNode;
   maxWidth?: number;
 };
-export type Ref = CTooltip;
 
-const Tooltip = forwardRef<Ref, Props>(
-  ({ content, maxWidth = 205, ...props }) => {
-    const classes = useStyles();
-    return (
-      <>
-        <CTooltip
-          content={content}
-          placement="bottom"
-          interactive
-          advancedOptions={{ maxWidth }}
-          {...props}
+/**
+ * Tooltip - 추가적인 정보를 표시합니다.(마우스 오버시)
+ *
+ * @param {ReactNode} content 보여주고싶은 정보
+ * @param {number} maxWidth 툴팁의 최대 가로 길이 기본 값(205)
+ *
+ * @returns {<CTooltip>} @coreui/react
+ */
+const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
+  const classes = useStyles();
+
+  return (
+    <>
+      <CTooltip
+        content={content}
+        placement="bottom"
+        interactive
+        advancedOptions={{ maxWidth }}
+        {...props}
+      >
+        <div
+          className={`d-inline-block rounded-circle bg-didicast-gray-3 text-center ${classes.qMarkOnCircle}`}
         >
-          <div
-            className={`d-inline-block rounded-circle bg-didicast-gray-3 text-center ${classes.qMarkOnCircle}`}
-          >
-            ?
-          </div>
-        </CTooltip>
-      </>
-    );
-  }
-);
+          ?
+        </div>
+      </CTooltip>
+    </>
+  );
+};
+
+Tooltip.defaultProps = {
+  content: "default text",
+  maxWidth: 205,
+};
 
 export default Tooltip;
