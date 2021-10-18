@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type TooltipProps = CTooltip & {
+export interface TooltipProps {
   content: ReactNode;
   maxWidth?: number;
-};
+}
 
 /**
  * Tooltip - 추가적인 정보를 표시합니다.(마우스 오버시)
@@ -38,7 +38,7 @@ type TooltipProps = CTooltip & {
  *
  * @returns {<CTooltip>} @coreui/react
  */
-const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
+const Tooltip = ({ content, maxWidth = 205, ...props }: TooltipProps) => {
   const classes = useStyles();
 
   return (
@@ -58,11 +58,6 @@ const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
       </CTooltip>
     </>
   );
-};
-
-Tooltip.defaultProps = {
-  content: "default text",
-  maxWidth: 205,
 };
 
 export default Tooltip;

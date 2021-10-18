@@ -1,19 +1,12 @@
-import Tooltip from "./Tooltip";
-import { withKnobs, text, number } from "@storybook/addon-knobs";
+import { Meta, Story } from "@storybook/react";
+import Tooltip, { TooltipProps } from "./Tooltip";
 
 export default {
   title: "Components/Tooltip",
   component: Tooltip,
-  decorators: [withKnobs],
-};
+} as Meta;
 
-export const tooltip = () => {
-  const content = text("content", "Default");
-  const maxWidth = number("maxWidth", 205);
+const Template: Story<TooltipProps> = (args) => <Tooltip {...args} />;
 
-  return <Tooltip content={content} maxWidth={maxWidth}></Tooltip>;
-};
-
-tooltip.story = {
-  name: "Default",
-};
+export const Default = Template.bind({});
+Default.args = { content: "Default", maxWidth: 205 };
