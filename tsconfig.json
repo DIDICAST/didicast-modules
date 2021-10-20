@@ -19,5 +19,5 @@
     "jsx": "react-jsx",
     "typeRoots": ["./src/typings"]
   },
-  "include": ["src/components", "src/typings"]
+  "include": ["src/components", "src/typings", "src/react-app-env.d.ts"]
 }
