@@ -6,7 +6,7 @@ exports[`environment > App renders without crashing 1`] = `
     class="container"
   >
     <button
-      class="d-flex justify-content-center align-items-center  makeStyles-button-1 btn btn-primary"
+      class="d-flex justify-content-center align-items-center  makeStyles-button-1 makeStyles-button-2 btn btn-primary"
       type="button"
     >
       Yeah~!

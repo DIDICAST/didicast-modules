@@ -1,13 +1,14 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from "@storybook/addon-docs";
 
 <Meta
   parameters={{
-    viewMode: 'docs',
+    viewMode: "docs",
     previewTabs: {
-    canvas: { hidden: true }
+      canvas: { hidden: true },
     },
   }}
-  title="Docs/Develop" />
+  title="Docs/Develop"
+/>
 
 ## Development mode
 
@@ -20,6 +21,7 @@ import { Meta } from '@storybook/addon-docs';
 ## `src` directory structure
 
 Development takes place inside `src` directory. There are two subdirectories inside:
+
 - `lib` is where your library code should live, this code will be bundled with rollup and published to NPM. Imports from `environment` directory are forbidden, eslint will throw an error. Exports from `src/lib/index.js` will be included in the library.
 - `environment` is where your development code lives (CSS frameworks, demo code, mocks etc). Contents will not be bundled inside library. `src/index.js` defines what CRA will render in browser during development.
 
@@ -33,7 +35,7 @@ Development takes place inside `src` directory. There are two subdirectories ins
 |       |   └── App.spec.js.snap # test snapshot
 |       └── index.js
 |-- index.js # entry point for CRA
-|-- lib # library code
+|-- components # library code
 |   |-- Component
 |   |   |-- Component.js # Component will be exposed as a part of library
 |   |   |-- Component.module.css # CSS module
@@ -44,5 +46,3 @@ Development takes place inside `src` directory. There are two subdirectories ins
 |   └── index.js # entry point for rollup build
 └── setupTests.js
 ```
-
-

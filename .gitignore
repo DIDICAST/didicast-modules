@@ -32,3 +32,6 @@ template.json
 
 # documentation
 storybook-static
+
+/src/styles/colors.config.json
+/src/styles/palette.ts
