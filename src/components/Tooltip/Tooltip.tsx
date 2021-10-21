@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { CTooltip } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
 
@@ -25,20 +24,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export interface TooltipProps {
-  content: ReactNode;
+export type TooltipProps = {
+  /** 표시 될 내용 */
+  content: React.ReactNode;
+  /** 나타나는 툴팁창의 최대 크기 */
   maxWidth?: number;
-}
+};
 
-/**
- * Tooltip - 추가적인 정보를 표시합니다.(마우스 오버시)
- *
- * @param {ReactNode} content 보여주고싶은 정보
- * @param {number} maxWidth 툴팁의 최대 가로 길이 기본 값(205)
- *
- * @returns {<CTooltip>} @coreui/react
- */
-const Tooltip = ({ content, maxWidth = 205, ...props }: TooltipProps) => {
+/**  `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.  */
+const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
   const classes = useStyles();
 
   return (
@@ -58,6 +52,10 @@ const Tooltip = ({ content, maxWidth = 205, ...props }: TooltipProps) => {
       </CTooltip>
     </>
   );
+};
+
+Tooltip.defaultProps = {
+  maxWidth: 205,
 };
 
 export default Tooltip;

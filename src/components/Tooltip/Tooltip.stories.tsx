@@ -16,6 +16,7 @@ export default {
   component: Tooltip,
   parameters: {
     docs: {
+      inlineStories: false,
       page: () => (
         <>
           <Title />
