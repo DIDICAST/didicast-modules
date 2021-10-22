@@ -1,8 +1,10 @@
 import CIcon from "@coreui/icons-react";
 import { CButton } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
-import { forwardRef, ReactNode } from "react";
+import { forwardRef, ReactNode, useMemo } from "react";
+
 import { ThemeColorType } from "../../styles/palette";
+import { ReactComponent as IconExcel } from "./excel-icon.svg";
 
 export type sizeType = "lg" | "sm" | "xs";
 export type Props = CButton & {
@@ -13,6 +15,7 @@ export type Props = CButton & {
   label: ReactNode;
   color?: ThemeColorType;
   size?: sizeType;
+  withExcelIcon?: boolean;
 };
 export type Ref = CButton;
 
@@ -73,6 +76,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         pixels[getSize(size)].paddingX[getSize(paddingSize)] ||
           pixels[getSize(size)].paddingX[sizeDefault]
       )}`,
+    paddingTop: ({ size, withExcelIcon }: Props) =>
+      !withExcelIcon
+        ? undefined
+        : theme.typography.pxToRem(pixels[getSize(size)].paddingY * 1.15),
+    paddingBottom: ({ size, withExcelIcon }: Props) =>
+      !withExcelIcon
+        ? undefined
+        : theme.typography.pxToRem(pixels[getSize(size)].paddingY * 0.85),
     borderColor: ({ variant }: Props) =>
       !variant ? "transparent !important" : "",
     borderRadius: theme.typography.pxToRem(6),
@@ -106,9 +117,27 @@ const useStyles = makeStyles((theme: Theme) => ({
       verticalAlign: "sub",
     },
     "& svg": {
-      minWidth: theme.typography.pxToRem(20),
-      minHeight: theme.typography.pxToRem(20),
+      width: ({ withExcelIcon }: Props) =>
+        `${theme.typography.pxToRem(!withExcelIcon ? 20 : 18)} !important`,
+      height: ({ withExcelIcon }: Props) =>
+        `${theme.typography.pxToRem(!withExcelIcon ? 20 : 24)} !important`,
+      minWidth: `${theme.typography.pxToRem(20)} !important`,
+      minHeight: `${theme.typography.pxToRem(20)} !important`,
       marginRight: theme.typography.pxToRem(16),
+
+      "&.icon-excel": {
+        marginTop: theme.typography.pxToRem(-2),
+      },
+      "& path": {
+        transition: "fill ease .3s",
+      },
+    },
+
+    "&:hover": {
+      "& path": {
+        fill: ({ withExcelIcon }: Props) =>
+          !withExcelIcon ? undefined : "white !important",
+      },
     },
   },
 }));
@@ -125,27 +154,41 @@ const Button = forwardRef<Ref, Props>(
       img,
       label,
       variant,
+      withExcelIcon,
       ...props
     },
     ref
   ) => {
-    const classes = useStyles({ size, variant, paddingSize } as Props);
+    const _variant = useMemo(
+      () => (!!withExcelIcon ? "outline" : variant),
+      [withExcelIcon, variant]
+    );
+    const classes = useStyles({
+      size,
+      variant: _variant,
+      paddingSize: !paddingSize && !!withExcelIcon ? "xs" : paddingSize,
+      withExcelIcon,
+    } as Props);
 
     return (
       <>
         <CButton
           innerRef={ref!}
-          className={`d-flex justify-content-center align-items-center ${
+          className={`d-inline-flex justify-content-center align-items-center ${
             className || ""
           } ${classes.button}`}
-          color={color}
+          color={!!withExcelIcon ? "didicast-deepblue-3" : color}
           size={size}
-          variant={variant}
+          variant={_variant}
           {...props}
         >
           {img && <img src={img} className="pr-2" alt="icon" />}
           {icon && <CIcon content={icon} size="xl" className="mr-2" />}
-          {IconComponent}
+          {!withExcelIcon ? (
+            IconComponent
+          ) : (
+            <IconExcel className="icon-excel mr-2" />
+          )}
           {label}
         </CButton>
       </>

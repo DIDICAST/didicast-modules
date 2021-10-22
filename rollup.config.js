@@ -11,6 +11,8 @@ import postcssPresetEnv from "postcss-preset-env";
 import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 import copy from "rollup-plugin-copy";
+import url from "rollup-plugin-url";
+import svgr from "@svgr/rollup";
 
 import pkg from "./package.json";
 
@@ -55,6 +57,8 @@ const config = {
       external: Object.keys(pkg.dependencies),
       extensions: [".js", ".json", ".html"],
     }),
+    url(),
+    svgr(),
     stylelint({
       throwOnError: true,
     }),
