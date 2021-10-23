@@ -1,8 +1,9 @@
 {
   "reject": [
     "@coreui/coreui",
-    "@storybook/preset-create-react-app",
-    "@typescript-eslint/parser",
-    "eslint"
+    "@coreui/react",
+    "@coreui/icons-react",
+    "eslint",
+    "stylelint"
   ]
 }
