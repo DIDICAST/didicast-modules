@@ -86,7 +86,11 @@ export default {
                           label="멤버 삭제"
                           variant="outline"
                           color="didicast-gray-3"
+                          paddingSize="sm"
                         />
+                      </li>
+                      <li>
+                        <Button label="멤버 내려받기" withExcelIcon />
                       </li>
                     </ul>
                   </TableCell>
