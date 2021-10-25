@@ -74,7 +74,6 @@ const Template: Story<SelectProps> = (args) => <Select {...args} />;
 export const Default = Template.bind({});
 Default.storyName = "Default";
 Default.args = {
-  onChange: () => {},
   value: { value: "default1", label: "label1" },
   options: [
     { value: "default1", label: "label1" },

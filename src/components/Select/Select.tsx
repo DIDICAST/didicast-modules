@@ -9,10 +9,14 @@ export type SelectProps = {
   onChange?: () => void;
 };
 
-const Select = (
-  { value, options, width = "160px", margin = "0 5px", onChange }: SelectProps,
-  { ...props }
-) => {
+const Select = ({
+  value,
+  options,
+  width = "160px",
+  margin = "0 5px",
+  onChange,
+  ...props
+}: SelectProps) => {
   const selectStyles = {
     container: () => ({
       margin: margin,
