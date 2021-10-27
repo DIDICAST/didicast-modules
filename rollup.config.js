@@ -39,7 +39,7 @@ const postcssPlugins = [
 const config = {
   input: "src/components/index.ts",
   output: {
-    dir: "lib",
+    dir: "lib/components",
     format: "esm",
     // name: 'ReactCalendarToolkit',
     globals: {
@@ -55,12 +55,10 @@ const config = {
       include: {},
       paths: ["src/components"],
       external: Object.keys(pkg.dependencies),
-      extensions: [".js", ".json", ".html"],
+      extensions: [".ts", ".tsx", ".js", ".json", ".html"],
     }),
-    url(),
-    svgr(),
     stylelint({
-      throwOnError: true,
+      // throwOnError: true,
     }),
     postcss({
       // inject: true,
@@ -85,8 +83,14 @@ const config = {
     commonjs({
       include: /node_modules/,
     }),
-    typescript({ useTsconfigDeclarationDir: true }),
+    typescript({
+      useTsconfigDeclarationDir: true,
+      exclude: "**/*.stories.tsx",
+      clean: true,
+    }),
     terser(),
+    url(),
+    svgr(),
     filesize(),
     copy({
       targets: [{ src: "src/styles", dest: "lib" }],
