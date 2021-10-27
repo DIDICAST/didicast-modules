@@ -39,7 +39,7 @@ const Select = ({
       container: () => ({
         margin: margin,
       }),
-      control: (provided: any, { isFocused }: any) => ({
+      control: (provided, { isFocused }) => ({
         ...provided,
         width: width,
         height: 48,
@@ -54,18 +54,15 @@ const Select = ({
           boxShadow: `0 2px 4px 2px rgba(0, 0, 0, 0.05)`,
         },
       }),
-      option: (
-        provided: any,
-        { data, isDisabled, isFocused, isSelected }: any
-      ) => ({
+      option: (provided, { data, isDisabled, isFocused, isSelected }) => ({
         ...provided,
         width: width,
         color: "var(--didicast-gray-3)",
         backgroundColor: isSelected
           ? "var(--didicast-blue-9)"
           : isFocused
-          ? " rgba(6, 176, 215, 0.05)"
-          : null,
+          ? "rgba(6, 176, 215, 0.05)"
+          : undefined,
         ":active": {
           ...provided[":active"],
           backgroundColor: "var(--didicast-blue-9)",
@@ -78,7 +75,7 @@ const Select = ({
         backgroundColor: "white",
       }),
       indicatorSeparator: () => ({ display: "none" }),
-      singleValue: (provided: any) => ({
+      singleValue: (provided) => ({
         ...provided,
         color: "var(--didicast-gray-3)",
       }),
