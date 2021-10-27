@@ -6,7 +6,7 @@ export type SelectProps = {
   margin?: string;
   value: object;
   options: object[];
-  onChange?: () => void;
+  onChange?: Function;
 };
 
 const Select = ({
