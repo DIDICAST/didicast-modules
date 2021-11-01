@@ -8,14 +8,15 @@ import { ReactComponent as IconExcel } from "./excel-icon.svg";
 
 export type sizeType = "lg" | "sm" | "xs";
 export type Props = CButton & {
+  label: ReactNode;
   paddingSize?: sizeType;
   icon?: string | string[];
   IconComponent?: ReactNode;
   img?: string;
-  label: ReactNode;
+  withExcelIcon?: boolean;
+
   color?: ThemeColorType;
   size?: sizeType;
-  withExcelIcon?: boolean;
 };
 export type Ref = CButton;
 
