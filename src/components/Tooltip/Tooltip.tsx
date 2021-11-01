@@ -1,5 +1,6 @@
-import { CTooltip } from "@coreui/react";
+import { ChildElement, CTooltip } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
+import { useMemo } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   qMarkOnCircle: {
@@ -24,16 +25,44 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export type TooltipProps = {
+export type TooltipProps = CTooltip & {
   /** 표시 될 내용 */
-  content: React.ReactNode;
+  content: ChildElement;
   /** 나타나는 툴팁창의 최대 크기 */
   maxWidth?: number;
+  childrenPreset?: "question-circle" | "warning-circle";
 };
 
 /**  `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.  */
-const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
+const Tooltip = ({
+  content,
+  maxWidth,
+  childrenPreset,
+  children,
+  ...props
+}: TooltipProps) => {
   const classes = useStyles();
+
+  const _children = useMemo<ChildElement>(() => {
+    if (!children) {
+      switch (childrenPreset) {
+        case "warning-circle":
+          return <span>!</span>;
+
+        case "question-circle":
+        default:
+          return (
+            <div
+              className={`d-inline-block rounded-circle bg-didicast-gray-3 text-center ${classes.qMarkOnCircle}`}
+            >
+              ?
+            </div>
+          );
+      }
+    } else {
+      return children;
+    }
+  }, [children, childrenPreset, classes.qMarkOnCircle]);
 
   return (
     <>
@@ -44,11 +73,7 @@ const Tooltip = ({ content, maxWidth, ...props }: TooltipProps) => {
         advancedOptions={{ maxWidth }}
         {...props}
       >
-        <div
-          className={`d-inline-block rounded-circle bg-didicast-gray-3 text-center ${classes.qMarkOnCircle}`}
-        >
-          ?
-        </div>
+        {_children}
       </CTooltip>
     </>
   );
