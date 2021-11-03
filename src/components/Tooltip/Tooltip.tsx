@@ -1,17 +1,17 @@
 import { ChildElement, CTooltip } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
 import { useMemo } from "react";
+import { ReactComponent as IconwarnMark } from "./ic-warnMark.svg";
+import { ReactComponent as IconQMark } from "./ic-question-circle.svg";
 
 const useStyles = makeStyles((theme: Theme) => ({
   qMarkOnCircle: {
-    width: theme.typography.pxToRem(20),
     marginLeft: theme.typography.pxToRem(10),
-    color: "var(--didicast-white)",
-    fontSize: theme.typography.pxToRem(14),
-    fontWeight: "bold",
-    lineHeight: theme.typography.pxToRem(20),
-    alignSelf: "center",
-    cursor: "help",
+    "& svg":{
+      width: theme.typography.pxToRem(20),
+      height: theme.typography.pxToRem(20),
+      marginBottom: theme.typography.pxToRem(3),
+    },
 
     "& + [data-tippy-root]": {
       "& .tippy-content": {
@@ -21,8 +21,28 @@ const useStyles = makeStyles((theme: Theme) => ({
       "& .tippy-arrow": {
         color: "#595959",
       },
+      "& .font-weight-bold":{
+        fontWeight: "normal !important",
+      }
     },
   },
+  warnMark: {
+    marginLeft: theme.typography.pxToRem(10),
+    "& svg":{
+      width: theme.typography.pxToRem(20),
+      height: theme.typography.pxToRem(20),
+      marginBottom: theme.typography.pxToRem(3),
+    },
+    "& + [data-tippy-root]": {
+      "& .tippy-content": {
+        maxWidth: "none",
+        backgroundColor: "var(--didicast-blue)",
+      },
+      "& .tippy-arrow": {
+        color: "var(--didicast-blue)",
+      },
+    }
+  }
 }));
 
 export type TooltipProps = CTooltip & {
@@ -31,6 +51,8 @@ export type TooltipProps = CTooltip & {
   /** 나타나는 툴팁창의 최대 크기 */
   maxWidth?: number;
   childrenPreset?: "question-circle" | "warning-circle";
+  IconwarnMark?: boolean;
+  IconQMark?: boolean;
 };
 
 /**  `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.  */
@@ -47,22 +69,26 @@ const Tooltip = ({
     if (!children) {
       switch (childrenPreset) {
         case "warning-circle":
-          return <span>!</span>;
+          return <span className={`d-inline-block rounded-circle text-center ${classes.warnMark}`}>
+                 
+                    <IconwarnMark/>
+                  </span>;
 
         case "question-circle":
         default:
           return (
             <div
-              className={`d-inline-block rounded-circle bg-didicast-gray-3 text-center ${classes.qMarkOnCircle}`}
+              className={`d-inline-block rounded-circle text-center ${classes.qMarkOnCircle}`}
             >
-              ?
+                    <IconQMark/>
             </div>
           );
       }
     } else {
       return children;
     }
-  }, [children, childrenPreset, classes.qMarkOnCircle]);
+  }, [children, childrenPreset, classes.qMarkOnCircle, classes.warnMark]);
+
 
   return (
     <>
