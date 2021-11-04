@@ -7,7 +7,7 @@ import { ReactComponent as IconQMark } from "./ic-question-circle.svg";
 const useStyles = makeStyles((theme: Theme) => ({
   qMarkOnCircle: {
     marginLeft: theme.typography.pxToRem(10),
-    "& svg":{
+    "& svg": {
       width: theme.typography.pxToRem(20),
       height: theme.typography.pxToRem(20),
       marginBottom: theme.typography.pxToRem(3),
@@ -21,14 +21,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       "& .tippy-arrow": {
         color: "#595959",
       },
-      "& .font-weight-bold":{
+      "& .font-weight-bold": {
         fontWeight: "normal !important",
-      }
+      },
     },
   },
   warnMark: {
     marginLeft: theme.typography.pxToRem(10),
-    "& svg":{
+    "& svg": {
       width: theme.typography.pxToRem(20),
       height: theme.typography.pxToRem(20),
       marginBottom: theme.typography.pxToRem(3),
@@ -41,25 +41,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       "& .tippy-arrow": {
         color: "var(--didicast-blue)",
       },
-    }
-  }
+    },
+  },
 }));
 
 export type TooltipProps = CTooltip & {
   /** 표시 될 내용 */
   content: ChildElement;
-  /** 나타나는 툴팁창의 최대 크기 */
+  /** 나타나는 툴팁창의 최대 너비 */
   maxWidth?: number;
+  /** 흔히 쓰는 children을 내장해놓고 활용합니다. (Storybook canvas controls 변화에 바로 반응하지 않으므로, 변경 후 새로고침 해서 확인해주세요.) */
   childrenPreset?: "question-circle" | "warning-circle";
-  IconwarnMark?: boolean;
-  IconQMark?: boolean;
 };
 
 /**  `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.  */
 const Tooltip = ({
-  content,
   maxWidth,
-  childrenPreset,
+  placement = "bottom",
+  interactive = true,
+  childrenPreset = "question-circle",
   children,
   ...props
 }: TooltipProps) => {
@@ -68,36 +68,39 @@ const Tooltip = ({
   const _children = useMemo<ChildElement>(() => {
     if (!children) {
       switch (childrenPreset) {
-        case "warning-circle":
-          return <span className={`d-inline-block rounded-circle text-center ${classes.warnMark}`}>
-                 
-                    <IconwarnMark/>
-                  </span>;
-
         case "question-circle":
-        default:
           return (
             <div
               className={`d-inline-block rounded-circle text-center ${classes.qMarkOnCircle}`}
             >
-                    <IconQMark/>
+              <IconQMark />
             </div>
           );
+
+        case "warning-circle":
+          return (
+            <span
+              className={`d-inline-block rounded-circle text-center ${classes.warnMark}`}
+            >
+              <IconwarnMark />
+            </span>
+          );
+
+        default:
+          return <div></div>;
       }
     } else {
       return children;
     }
   }, [children, childrenPreset, classes.qMarkOnCircle, classes.warnMark]);
 
-
   return (
     <>
       <CTooltip
-        content={content}
-        placement="bottom"
-        interactive
-        advancedOptions={{ maxWidth }}
         {...props}
+        placement={placement}
+        interactive={interactive}
+        advancedOptions={{ maxWidth }}
       >
         {_children}
       </CTooltip>
