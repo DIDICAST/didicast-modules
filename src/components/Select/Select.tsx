@@ -10,6 +10,7 @@ import SelectComponent, {
 } from "react-select";
 
 export type SelectProps = {
+  display?: string;
   width?:
     | (string | (string & {}))[]
     | Property.Width<string | number>
@@ -19,6 +20,7 @@ export type SelectProps = {
     | Property.Margin<string | number>
     | (Property.Margin<string | number> | undefined)[];
   value?: PropsValue<object>;
+  className?: string;
   options?: OptionsOrGroups<object, GroupBase<object>>;
   onChange?: (
     newValue: SingleValue<object>,
@@ -29,8 +31,9 @@ export type SelectProps = {
 const Select = ({
   value,
   options,
-  width = "160px",
-  margin = "0 5px",
+  width = "auto",
+  margin = "0 12px 0 0",
+  display,
   onChange,
   ...props
 }: SelectProps) => {
