@@ -1,5 +1,7 @@
+import { CInput, CRow } from "@coreui/react";
 import {
   CircularProgress,
+  Grid,
   makeStyles,
   Table,
   TableBody,
@@ -9,6 +11,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
+import { action } from "@storybook/addon-actions";
 import {
   ArgsTable,
   Canvas,
@@ -18,14 +21,11 @@ import {
   Subtitle,
   Title,
 } from "@storybook/addon-docs";
-
-import { action } from "@storybook/addon-actions";
-
 import { Meta, Story } from "@storybook/react";
-import Modal, { Props as ModalProps } from "./Modal";
-import Button from "../Button/Button";
 import { useState, useCallback } from "react";
-import { CInput, CRow } from "@coreui/react";
+
+import Button from "../Button/Button";
+import Modal, { Props as ModalProps } from "./Modal";
 
 export default {
   title: "Components/Modal",
@@ -80,12 +80,14 @@ Default.args = {
   closeOnBackdrop: true,
   children: <>Default Modal</>,
   footer: (
-    <>
-      <>
+    <Grid container spacing={2}>
+      <Grid item xs>
         <Button label="취소" color="didicast-gray-5" block />
+      </Grid>
+      <Grid item xs>
         <Button label="확인" block />
-      </>
-    </>
+      </Grid>
+    </Grid>
   ),
 };
 
@@ -138,18 +140,22 @@ export const NoTitle: Story<ModalProps> = () => {
       <Modal
         show={modal.twoButtons}
         footer={
-          <>
-            <Button
-              label="취소"
-              color="didicast-gray-5"
-              onClick={() => handleOpen("two")}
-              block
-            />
-            <Button label="확인" block />
-          </>
+          <Grid container spacing={2}>
+            <Grid item xs>
+              <Button
+                label="취소"
+                color="didicast-gray-5"
+                onClick={() => handleOpen("two")}
+                block
+              />
+            </Grid>
+            <Grid item xs>
+              <Button label="확인" block />
+            </Grid>
+          </Grid>
         }
       >
-        <div className={`text-center ${classes.modalText}`}>
+        <div className={`text-center mt-1`}>
           업로드된 영상을
           <br />
           삭제하시겠습니까?
@@ -159,11 +165,16 @@ export const NoTitle: Story<ModalProps> = () => {
         show={modal.singleButton}
         footer={
           <>
-            <Button label="확인" block onClick={() => handleOpen("single")} />
+            <Button
+              label="확인"
+              className="m-0"
+              block
+              onClick={() => handleOpen("single")}
+            />
           </>
         }
       >
-        <div className={`text-center ${classes.modalText}`}>
+        <div className={`text-center mt-1`}>
           강의로 등록된 영상으로
           <br />
           삭제가 불가능합니다.
@@ -177,7 +188,7 @@ export const NoTitle: Story<ModalProps> = () => {
           </>
         }
       >
-        <div className={`text-center ${classes.modalText}`}>
+        <div className={`text-center mt-1`}>
           추가 가능한 클래스가 없습니다.
           <br />
           클래스를 먼저 만들어주세요!
@@ -213,22 +224,26 @@ const ButtonTemplate: Story<ModalProps> = () => {
         title="영상 제목 수정"
         show={open}
         footer={
-          <>
-            <Button
-              label="취소"
-              color="didicast-gray-5"
-              onClick={handleOpen}
-              block
-            />
-            <Button label="확인" block />
-          </>
+          <Grid container spacing={2}>
+            <Grid item xs>
+              <Button
+                label="취소"
+                color="didicast-gray-5"
+                onClick={handleOpen}
+                block
+              />
+            </Grid>
+            <Grid item xs>
+              <Button label="확인" block />
+            </Grid>
+          </Grid>
         }
       >
-        <div className={`mb-3 ${classes.modalSubtext}`}>
+        <div className={`mb-n3 ${classes.modalSubtext}`}>
           영상 제목을 수정하시겠습니까? <br />
           최대 50자까지 작성 가능합니다.
+          <CInput className="mt-3" />
         </div>
-        <CInput />
       </Modal>
     </>
   );
@@ -260,7 +275,7 @@ export const AutoClose: Story<ModalProps> = () => {
             className={`mt-3 mb-4 ${classes.progressModalSpinner}`}
             size={24}
           />
-          <div className={`mb-5 text-center ${classes.modalText}`}>
+          <div className={`mb-5 text-center`}>
             수료증을 재발행중입니다.
             <br />
             잠시만 기다려주세요
@@ -294,10 +309,18 @@ export const LargeModal: Story<ModalProps> = () => {
         centered
         style={{ height: "700px" }}
         footer={
-          <>
-            <Button label="취소" color="didicast-gray-5" onClick={handleOpen} />
-            <Button label="확인" />
-          </>
+          <Grid container spacing={2} style={{ width: "auto" }}>
+            <Grid item>
+              <Button
+                label="취소"
+                color="didicast-gray-5"
+                onClick={handleOpen}
+              />
+            </Grid>
+            <Grid item>
+              <Button label="확인" />
+            </Grid>
+          </Grid>
         }
       >
         <div>
@@ -309,11 +332,6 @@ export const LargeModal: Story<ModalProps> = () => {
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  modalText: {
-    fontSize: theme.typography.pxToRem(20),
-    lineHeight: theme.typography.pxToRem(32),
-    color: "#323237",
-  },
   modalSubtext: {
     fontSize: theme.typography.pxToRem(16),
     lineHeight: theme.typography.pxToRem(24),
