@@ -42,9 +42,9 @@ export default {
                   <TableCell>
                     <DTitle title="수강현황" icon="📌" />
                     <DTitle title="패키지 관리" icon="📚" />
-                    <DTitle title="패키지 만들기" icon="📚" />
+                    <DTitle title="패키지 만들기" icon="✏️" />
                     <DTitle title="팀 관리" icon="👨‍👧‍👦" />
-                    <DTitle title="팀 관리" icon="👨‍👧‍👦" />
+                    <DTitle title="팀 관리" icon="✏️" />
                     <DTitle title="멤버 관리" icon="🧑🏻‍💻" />
                     <DTitle title="수강 현황" icon="💻" />
                     <DTitle title="영상 클라우드 관리" icon="📁" />
