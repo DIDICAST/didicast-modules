@@ -4,6 +4,7 @@
     "@coreui/react",
     "@coreui/icons-react",
     "eslint",
+    "react-router-dom",
     "stylelint"
   ]
 }
