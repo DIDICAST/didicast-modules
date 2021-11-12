@@ -50,11 +50,13 @@ export type TooltipProps = CTooltip & {
   content: ChildElement;
   /** 나타나는 툴팁창의 최대 너비 */
   maxWidth?: number;
-  /** 흔히 쓰는 children을 내장해놓고 활용합니다. (Storybook canvas controls 변화에 바로 반응하지 않으므로, 변경 후 새로고침 해서 확인해주세요.) */
+  /** 흔히 쓰는 children을 내장해놓고 활용합니다. */
   childrenPreset?: "question-circle" | "warning-circle";
 };
 
-/**  `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.  */
+/**
+ * `Tooltip` 은 마우스 오버시 부수적인 정보를 제공합니다.
+ */
 const Tooltip = ({
   maxWidth,
   placement = "bottom",
