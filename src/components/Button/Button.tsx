@@ -175,9 +175,11 @@ const Button = forwardRef<Ref, Props>(
       <>
         <CButton
           innerRef={ref!}
-          className={`d-inline-flex justify-content-center align-items-center ${
-            className || ""
-          } ${classes.button}`}
+          className={`d${
+            !props.block ? "-inline" : ""
+          }-flex justify-content-center align-items-center ${className || ""} ${
+            classes.button
+          }`}
           color={!!withExcelIcon ? "didicast-deepblue-3" : color}
           size={size}
           variant={_variant}
