@@ -1,11 +1,16 @@
 import { CModal, CModalBody, CModalFooter, CModalHeader } from "@coreui/react";
-import { makeStyles, Theme } from "@material-ui/core";
-import { ReactNode } from "react";
+import { makeStyles, Theme, Grid } from "@material-ui/core";
+import { ReactNode, useMemo } from "react";
+import Button from "../Button/Button";
+import { useState, useCallback } from "react";
 
+// export type footerButton = "double" | "single"
 export type Props = CModal & {
   footer?: ReactNode;
   title?: string;
+  footerTypeWithButton?: "double" | "single";
 };
+
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     "& .modal-dialog": {},
@@ -59,18 +64,63 @@ const Modal = ({
   centered,
   closeOnBackdrop = false,
   className,
+  footerTypeWithButton,
   children,
   footer,
   title,
   ...props
 }: Props) => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
+  const handleOpen = useCallback(() => {
+    setOpen(!open);
+  }, [open, setOpen]);
+  const _footer = useMemo<ReactNode>(() => {
+    if (footerTypeWithButton) {
+      switch (footerTypeWithButton) {
+        case "double":
+          return (
+            <Grid container spacing={2}>
+              <Grid item xs>
+                <Button
+                  label="취소"
+                  color="didicast-gray-5"
+                  block
+                  onClick={handleOpen}
+                />
+              </Grid>
+              <Grid item xs>
+                <Button label="확인" block onClick={handleOpen} />
+              </Grid>
+            </Grid>
+          );
+
+        case "single":
+        default:
+          return (
+            <Grid container spacing={2}>
+              <Grid item xs>
+                <Button label="확인" block onClick={handleOpen} />
+              </Grid>
+            </Grid>
+          );
+      }
+    } else {
+      return footer;
+    }
+  }, [footer, footerTypeWithButton, handleOpen]);
 
   return (
     <>
+      <Button
+        label="Default Dialog"
+        onClick={handleOpen}
+        paddingSize="lg"
+        variant="outline"
+      />
       <CModal
+        show={open}
         {...props}
-        centered={centered}
         closeOnBackdrop={closeOnBackdrop}
         className={`${classes.container}${className ? ` ${className}` : ""}`}
       >
@@ -78,8 +128,8 @@ const Modal = ({
           <div className="d-flex align-items-start">{title}</div>
         </CModalHeader>
         <CModalBody>{children}</CModalBody>
-        {footer && (
-          <CModalFooter className="flex-nowrap">{footer}</CModalFooter>
+        {!footer && (
+          <CModalFooter className="flex-nowrap">{_footer}</CModalFooter>
         )}
       </CModal>
     </>
