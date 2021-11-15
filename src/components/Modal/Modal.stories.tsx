@@ -11,7 +11,6 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { action } from "@storybook/addon-actions";
 import {
   ArgsTable,
   Canvas,
@@ -22,7 +21,7 @@ import {
   Title,
 } from "@storybook/addon-docs";
 import { Meta, Story } from "@storybook/react";
-import { useState, useCallback } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 
 import Button from "../Button/Button";
 import Modal, { Props as ModalProps } from "./Modal";
@@ -56,13 +55,23 @@ export default {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Modal footerTypeWithButton="double" footer>
+                    <Template
+                      aria-describedby="Dialog_sm_type1"
+                      didicastButtonsInFooter={[
+                        {
+                          label: "취소",
+                          color: "didicast-gray-5",
+                          block: true,
+                        },
+                        { label: "확인", block: true },
+                      ]}
+                    >
                       <div className={`text-center mt-1`}>
                         업로드된 영상을
                         <br />
                         삭제하시겠습니까?
                       </div>
-                    </Modal>
+                    </Template>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -78,13 +87,16 @@ export default {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Modal footerTypeWithButton="single">
+                    <Template
+                      aria-describedby="Dialog_sm_type2"
+                      didicastButtonsInFooter={[{ label: "확인", block: true }]}
+                    >
                       <div className={`text-center mt-1`}>
                         업로드된 영상을
                         <br />
                         삭제하시겠습니까?
                       </div>
-                    </Modal>
+                    </Template>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -99,7 +111,17 @@ export default {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Modal footerTypeWithButton="double">
+                    <Template
+                      aria-describedby="Dialog_sm_type3"
+                      didicastButtonsInFooter={[
+                        {
+                          label: "취소",
+                          color: "didicast-gray-5",
+                          block: true,
+                        },
+                        { label: "확인", block: true },
+                      ]}
+                    >
                       <div className={`text-center mt-1`}>
                         업로드된 영상을
                         <br />
@@ -109,7 +131,7 @@ export default {
                       모달 사용시 부가 설명이 필요한 경우에<br/>
 텍스트 스타일은 이렇게 표기 됩니다.
   </div> */}
-                    </Modal>
+                    </Template>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -123,14 +145,58 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ModalProps> = (args) => <Modal {...args} />;
+const Template: Story<ModalProps> = ({
+  "aria-describedby": describedby,
+  footer,
+  didicastButtonsInFooter: _didicastButtonsInFooter,
+  ...args
+}) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  const didicastButtonsInFooter = useMemo(() => {
+    const buttons = _didicastButtonsInFooter;
+    if (buttons) {
+      buttons[0].onClick = handleOpen;
+    }
+
+    return buttons;
+  }, [_didicastButtonsInFooter, handleOpen]);
+
+  useEffect(() => {
+    if (!footer && !didicastButtonsInFooter && open) {
+      (async () => {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        handleOpen();
+      })();
+    }
+  }, [footer, didicastButtonsInFooter, open, handleOpen]);
+
+  return (
+    <>
+      <Button
+        label={describedby}
+        onClick={handleOpen}
+        paddingSize="lg"
+        variant="outline"
+      />
+      <Modal
+        show={open}
+        footer={footer}
+        didicastButtonsInFooter={didicastButtonsInFooter}
+        {...args}
+      />
+    </>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
   closeOnBackdrop: true,
   children: (
     <>
-      {" "}
       <div className={`text-center mt-1`}>
         업로드된 영상을
         <br />
@@ -138,7 +204,12 @@ Default.args = {
       </div>
     </>
   ),
-  footerTypeWithButton: "double",
+  didicastButtonsInFooter: [
+    { label: "취소", color: "didicast-gray-5", block: true },
+    { label: "확인", block: true },
+  ],
+
+  "aria-describedby": "Default dialog",
 };
 
 export const SingleConfirm = Template.bind({});
@@ -146,7 +217,6 @@ SingleConfirm.args = {
   closeOnBackdrop: true,
   children: (
     <>
-      {" "}
       <div className={`text-center mt-1`}>
         업로드된 영상을
         <br />
@@ -154,7 +224,9 @@ SingleConfirm.args = {
       </div>
     </>
   ),
-  footerTypeWithButton: "single",
+  didicastButtonsInFooter: [{ label: "확인", block: true }],
+
+  "aria-describedby": "SingleConfirm dialog",
 };
 
 export const AddFunction = Template.bind({});
@@ -163,7 +235,6 @@ AddFunction.args = {
   closeOnBackdrop: true,
   children: (
     <>
-      {" "}
       <div className={`mb-n3`}>
         영상 제목을 수정하시겠습니까? <br />
         최대 50자까지 작성 가능합니다.
@@ -174,14 +245,18 @@ AddFunction.args = {
       </div>
     </>
   ),
-  footerTypeWithButton: "double",
+  didicastButtonsInFooter: [
+    { label: "취소", color: "didicast-gray-5", block: true },
+    { label: "확인", block: true },
+  ],
+
+  "aria-describedby": "AddFunction dialog",
 };
 
 export const AutoClose = Template.bind({});
 AutoClose.args = {
   children: (
     <>
-      {" "}
       <div className="d-flex flex-column align-items-center">
         <CircularProgress
           className={`mt-3 mb-4`}
@@ -196,7 +271,8 @@ AutoClose.args = {
       </div>
     </>
   ),
-  footerTypeWithButton: undefined,
+
+  "aria-describedby": "AutoClose dialog",
 };
 
 // export const NoTitle: Story<ModalProps> = () => {

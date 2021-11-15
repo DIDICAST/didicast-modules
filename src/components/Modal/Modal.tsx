@@ -1,14 +1,11 @@
 import { CModal, CModalBody, CModalFooter, CModalHeader } from "@coreui/react";
 import { makeStyles, Theme, Grid } from "@material-ui/core";
-import { ReactNode, useMemo } from "react";
-import Button from "../Button/Button";
-import { useState, useCallback } from "react";
+import { ReactNode } from "react";
+import Button, { Props as ButtonProps } from "../Button/Button";
 
-// export type footerButton = "double" | "single"
 export type Props = CModal & {
   footer?: ReactNode;
-  title?: string;
-  footerTypeWithButton?: "double" | "single";
+  didicastButtonsInFooter?: ButtonProps[];
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -64,75 +61,38 @@ const Modal = ({
   centered,
   closeOnBackdrop = false,
   className,
-  footerTypeWithButton,
   children,
-  footer,
   title,
+  footer,
+  didicastButtonsInFooter,
   ...props
 }: Props) => {
-  const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const handleOpen = useCallback(() => {
-    setOpen(!open);
-  }, [open, setOpen]);
-  const _footer = useMemo<ReactNode>(() => {
-    if (footerTypeWithButton) {
-      switch (footerTypeWithButton) {
-        case "double":
-          return (
-            <Grid container spacing={2}>
-              <Grid item xs>
-                <Button
-                  label="취소"
-                  color="didicast-gray-5"
-                  block
-                  onClick={handleOpen}
-                />
-              </Grid>
-              <Grid item xs>
-                <Button label="확인" block onClick={handleOpen} />
-              </Grid>
-            </Grid>
-          );
-
-        case "single":
-        default:
-          return (
-            <Grid container spacing={2}>
-              <Grid item xs>
-                <Button label="확인" block onClick={handleOpen} />
-              </Grid>
-            </Grid>
-          );
-      }
-    } else {
-      return footer;
-    }
-  }, [footer, footerTypeWithButton, handleOpen]);
 
   return (
-    <>
-      <Button
-        label="Default Dialog"
-        onClick={handleOpen}
-        paddingSize="lg"
-        variant="outline"
-      />
-      <CModal
-        show={open}
-        {...props}
-        closeOnBackdrop={closeOnBackdrop}
-        className={`${classes.container}${className ? ` ${className}` : ""}`}
-      >
-        <CModalHeader>
-          <div className="d-flex align-items-start">{title}</div>
-        </CModalHeader>
-        <CModalBody>{children}</CModalBody>
-        {!footer && (
-          <CModalFooter className="flex-nowrap">{_footer}</CModalFooter>
-        )}
-      </CModal>
-    </>
+    <CModal
+      {...props}
+      closeOnBackdrop={closeOnBackdrop}
+      className={`${classes.container}${className ? ` ${className}` : ""}`}
+    >
+      <CModalHeader>
+        <div className="d-flex align-items-start">{title}</div>
+      </CModalHeader>
+      <CModalBody>{children}</CModalBody>
+      {footer || didicastButtonsInFooter ? (
+        <CModalFooter className="flex-nowrap">
+          {footer || (
+            <Grid container spacing={2}>
+              {didicastButtonsInFooter!.map((btnProps, idx) => (
+                <Grid key={idx} item xs>
+                  <Button {...btnProps} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </CModalFooter>
+      ) : null}
+    </CModal>
   );
 };
 
