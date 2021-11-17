@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     "& .modal-body": {
       paddingTop: 0,
-      paddingBottom: theme.typography.pxToRem(22),
+      paddingBottom: 0,
       color: "#323237",
       fontSize: theme.typography.pxToRem(20),
       lineHeight: 1.6,

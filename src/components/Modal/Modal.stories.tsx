@@ -66,7 +66,7 @@ export default {
                         { label: "확인", block: true },
                       ]}
                     >
-                      <div className={`text-center mt-1`}>
+                      <div className={`text-center mb-3`}>
                         업로드된 영상을
                         <br />
                         삭제하시겠습니까?
@@ -91,7 +91,7 @@ export default {
                       aria-describedby="Dialog_sm_type2"
                       didicastButtonsInFooter={[{ label: "확인", block: true }]}
                     >
-                      <div className={`text-center mt-1`}>
+                      <div className={`text-center mb-3`}>
                         업로드된 영상을
                         <br />
                         삭제하시겠습니까?
@@ -122,18 +122,150 @@ export default {
                         { label: "확인", block: true },
                       ]}
                     >
-                      <div className={`text-center mt-1`}>
+                      <div className={`text-center`}>
                         업로드된 영상을
                         <br />
                         삭제하시겠습니까?
                       </div>
                       <div className={`text-didicast-gray-3 mt-3 text-center`}>
-                        <Typography variant="body2">
-                        모달 사용시 부가 설명이 필요한 경우에<br/>
-                      텍스트 스타일은 이렇게 표기 됩니다.
+                        <Typography variant="body1">
+                          모달 사용시 부가 설명이 필요한 경우에
+                          <br />
+                          텍스트 스타일은 이렇게 표기 됩니다.
                         </Typography>
-                      
+                      </div>
+                    </Template>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="h6" className="m-0">
+                      Dialog_sm_type4
+                    </Typography>
+                    <Typography className="mt-2">
+                      (4) 링크 버튼
+                      <br />
+                      모달에서 페이지 이동이 필요할때 사용
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Template
+                      aria-describedby="Dialog_sm_type4"
+                      didicastButtonsInFooter={[{ label: "확인", block: true }]}
+                    >
+                      <div className={`text-center`}>
+                        추가 가능한 클래스가 없습니다.
+                        <br />
+                        클래스를 먼저 만들어주세요!
+                      </div>
+                      <div className={`text-didicast-gray-3 mt-3 text-center`}>
+                        <Typography variant="body1">
+                          클래스에 사용할 영상을 아직 업로드 하지 않으셨나요?
+                          <br />
+                          <a href="#">영상 클라우드로 이동</a>
+                        </Typography>
+                      </div>
+                    </Template>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="h6" className="m-0">
+                      Dialog_sm_type5
+                    </Typography>
+                    <Typography className="mt-2">
+                      (5) 정보 수집 요소
+                      <br />
+                      사용자의 동작으로 정보를 전달 받아 할때 사용
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Template
+                      aria-describedby="Dialog_sm_type5"
+                      title="영상 제목 수정"
+                      didicastButtonsInFooter={[
+                        {
+                          label: "취소",
+                          color: "didicast-gray-5",
+                          block: true,
+                        },
+                        { label: "확인", block: true },
+                      ]}
+                    >
+                      <Typography variant="body1">
+                        영상 제목을 수정 하시겠습니까?
+                        <br />
+                        최대 50자까지 작성 가능합니다.
+                        <CInput
+                          className="mt-3"
+                          style={{ height: "calc(2.5em + 0.75rem + 2px)" }}
+                        />
+                      </Typography>
+                    </Template>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="h6" className="m-0">
+                      Dialog_sm_type6
+                    </Typography>
+                    <Typography className="mt-2">
+                      (6) 자동 종료
+                      <br />
+                      사용자 요청 동작이 완료 됨과 동시에 자동 종료 됨
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Template aria-describedby="Dialog_sm_type6">
+                      <div className="d-flex flex-column align-items-center">
+                        <CircularProgress
+                          className="mb-4"
+                          style={{
+                            color: "#06b0d7",
+                          }}
+                          size={24}
+                        />
+                        <div className={`text-center mb-5`}>
+                          수료증을 재 발행 중입니다.
+                          <br />
+                          잠시만 기다려주세요
                         </div>
+                      </div>
+                    </Template>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="h6" className="m-0">
+                      Dialog_lg
+                    </Typography>
+                    <Typography className="mt-2">Large size</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Template
+                      aria-describedby="Dialog_lg"
+                      size="lg"
+                      title="멤버 추가"
+                      footer={
+                        <Grid container spacing={2} style={{ width: "auto" }}>
+                          <Grid item>
+                            <Button
+                              label="취소"
+                              color="didicast-gray-5"
+                              // onClick={handleOpen}
+                            />
+                          </Grid>
+                          <Grid item>
+                            <Button label="확인" />
+                          </Grid>
+                        </Grid>
+                      }
+                    >
+                      <div className={`text-left mt-1`}>
+                        업로드된 영상을
+                        <br />
+                        삭제하시겠습니까?
+                      </div>
                     </Template>
                   </TableCell>
                 </TableRow>
@@ -200,7 +332,7 @@ Default.args = {
   closeOnBackdrop: true,
   children: (
     <>
-      <div className={`text-center mt-1`}>
+      <div className={`text-center mb-3`}>
         업로드된 영상을
         <br />
         삭제하시겠습니까?
@@ -220,7 +352,7 @@ SingleConfirm.args = {
   closeOnBackdrop: true,
   children: (
     <>
-      <div className={`text-center mt-1`}>
+      <div className={`text-center mb-3`}>
         업로드된 영상을
         <br />
         삭제하시겠습니까?
@@ -242,7 +374,7 @@ AddFunction.args = {
         영상 제목을 수정하시겠습니까? <br />
         최대 50자까지 작성 가능합니다.
         <CInput
-          className="mt-4"
+          className="my-3"
           style={{ height: "calc(2.5em + 0.75rem + 2px)" }}
         />
       </div>
@@ -262,7 +394,7 @@ AutoClose.args = {
     <>
       <div className="d-flex flex-column align-items-center">
         <CircularProgress
-          className={`mt-3 mb-4`}
+          className={`mb-4`}
           style={{ color: "#06b0d7" }}
           size={24}
         />
@@ -278,25 +410,24 @@ AutoClose.args = {
   "aria-describedby": "AutoClose dialog",
 };
 
+// export const LargeSize = Template.bind({});
+// LargeSize.args = {
+//   title: "멤버 추가",
+//   size: "lg",
+//   children: (
+//     <>
+//       <div className="d-flex flex-column">
+//         <Typography>Children 영역</Typography>
+//       </div>
+//     </>
+//   ),
+//   didicastButtonsInFooter: [
+//     { label: "취소", color: "didicast-gray-5", block: true },
+//     { label: "확인", block: true },
+//   ],
 
-export const LargeSize = Template.bind({});
-LargeSize.args = {
-  title: "멤버 추가", 
-  size: "lg",
-  children: (
-    <>
-      <div className="d-flex flex-column">
-      <Typography>Children 영역</Typography>
-      </div>
-    </>
-  ),
-  didicastButtonsInFooter: [
-    { label: "취소", color: "didicast-gray-5", block: true },
-    { label: "확인", block: true },
-  ],
-  
-  "aria-describedby": "LargeSize dialog",
-};
+//   "aria-describedby": "LargeSize dialog",
+// };
 
 // export const NoTitle: Story<ModalProps> = () => {
 //   const [modal, setModal] = useState({
@@ -503,10 +634,12 @@ export const LargeModal: Story<ModalProps> = () => {
     <>
       <CRow>
         <div className="mx-3">
-          <Typography variant="h5" className="mb-2">
-            Large Modal
-          </Typography>
-          <Button label="모달 열기" onClick={handleOpen} />
+          <Button
+            label="Large Modal"
+            paddingSize="lg"
+            variant="outline"
+            onClick={handleOpen}
+          />
         </div>
       </CRow>
       <Modal
