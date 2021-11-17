@@ -127,10 +127,13 @@ export default {
                         <br />
                         삭제하시겠습니까?
                       </div>
-                      {/* <div className={`text-didicast-gray-3 mt-3 ${classes.modalSubtext}`}>
-                      모달 사용시 부가 설명이 필요한 경우에<br/>
-텍스트 스타일은 이렇게 표기 됩니다.
-  </div> */}
+                      <div className={`text-didicast-gray-3 mt-3 text-center`}>
+                        <Typography variant="body2">
+                        모달 사용시 부가 설명이 필요한 경우에<br/>
+                      텍스트 스타일은 이렇게 표기 됩니다.
+                        </Typography>
+                      
+                        </div>
                     </Template>
                   </TableCell>
                 </TableRow>
@@ -273,6 +276,26 @@ AutoClose.args = {
   ),
 
   "aria-describedby": "AutoClose dialog",
+};
+
+
+export const LargeSize = Template.bind({});
+LargeSize.args = {
+  title: "멤버 추가", 
+  size: "lg",
+  children: (
+    <>
+      <div className="d-flex flex-column">
+      <Typography>Children 영역</Typography>
+      </div>
+    </>
+  ),
+  didicastButtonsInFooter: [
+    { label: "취소", color: "didicast-gray-5", block: true },
+    { label: "확인", block: true },
+  ],
+  
+  "aria-describedby": "LargeSize dialog",
 };
 
 // export const NoTitle: Story<ModalProps> = () => {
