@@ -1,12 +1,12 @@
 import CIcon from "@coreui/icons-react";
 import { CButton } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
-import { forwardRef, ReactNode, useMemo } from "react";
+import React, { forwardRef, ReactNode, useMemo } from "react";
 
 import { ThemeColorType } from "../../styles/palette";
+import { sizeType } from "..";
 import { ReactComponent as IconExcel } from "./excel-icon.svg";
 
-export type sizeType = "lg" | "sm" | "xs";
 export type Props = CButton & {
   label: ReactNode;
   paddingSize?: sizeType;
@@ -17,6 +17,7 @@ export type Props = CButton & {
 
   color?: ThemeColorType;
   size?: sizeType;
+  ref?: React.Ref<CButton>;
 };
 export type Ref = CButton;
 
