@@ -38,7 +38,8 @@ const Select = ({
 }: SelectProps) => {
   const selectStyles = useMemo<StylesConfig<object, false, GroupBase<object>>>(
     () => ({
-      container: () => ({
+      container: (provided) => ({
+        ...provided,
         margin: margin,
       }),
       control: (provided, { isFocused }) => ({
@@ -70,13 +71,14 @@ const Select = ({
           backgroundColor: "var(--didicast-blue-9)",
         },
       }),
-      menu: () => ({
+      menu: (provided) => ({
+        ...provided,
         width: width,
         borderRadius: "4px",
         boxShadow: " 0 2px 4px 2px rgba(0, 0, 0, 0.1)",
         backgroundColor: "white",
       }),
-      indicatorSeparator: () => ({ display: "none" }),
+      indicatorSeparator: (provided) => ({ ...provided, display: "none" }),
       singleValue: (provided) => ({
         ...provided,
         color: "var(--didicast-gray-3)",

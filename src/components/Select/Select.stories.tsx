@@ -28,7 +28,7 @@ export default {
           <Subtitle />
           <Description />
           <Canvas>
-            <Table>
+            <Table style={{ marginBottom: "10rem" }}>
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
@@ -94,7 +94,11 @@ export default {
   },
 } as Meta;
 
-const Template: Story<SelectProps> = (args) => <Select {...args} />;
+const Template: Story<SelectProps> = (args) => (
+  <div style={{ paddingBottom: "10rem" }}>
+    <Select {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.storyName = "Default";
