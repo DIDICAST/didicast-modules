@@ -15,6 +15,7 @@ import {
   PRIMARY_STORY,
 } from "@storybook/addon-docs";
 import { Meta, Story } from "@storybook/react";
+import { AutoClose } from "../Modal/Modal.stories";
 import Select, { SelectProps } from "./Select";
 
 export default {
@@ -72,7 +73,6 @@ export default {
                   <TableCell>
                     <Select
                       className={`d-inline-flex flex-column`}
-                      width={"auto"}
                       defaultValue={{ value: "all", label: "전체 보기" }}
                       // value={{ value: "all", label: "전체 보기" }}
                       options={[
@@ -126,8 +126,8 @@ W120.args = {
 export const Wauto = Template.bind({});
 Wauto.storyName = "didicastSelect";
 Wauto.args = {
-  className: "d-inline-flex flex-column",
   width: "auto",
+  className: "d-inline-flex flex-column",
   defaultValue: { value: "default1", label: "label1" },
   options: [
     { value: "default1", label: "label1" },

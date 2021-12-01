@@ -31,20 +31,22 @@ export type SelectProps = {
 const Select = ({
   value,
   options,
-  width = "auto",
+  width,
   margin = "0 12px 0 0",
   onChange,
   ...props
 }: SelectProps) => {
   const selectStyles = useMemo<StylesConfig<object, false, GroupBase<object>>>(
     () => ({
+      
       container: (provided) => ({
         ...provided,
+        ...(width? {width}: {} ),
         margin: margin,
       }),
       control: (provided, { isFocused }) => ({
         ...provided,
-        width: width,
+        
         height: 48,
         paddingLeft: 4,
         borderColor: isFocused ? "var(--didicast-blue)" : "#d0d0d0",
@@ -59,7 +61,7 @@ const Select = ({
       }),
       option: (provided, { data, isDisabled, isFocused, isSelected }) => ({
         ...provided,
-        width: width,
+       
         color: "var(--didicast-gray-3)",
         backgroundColor: isSelected
           ? "var(--didicast-blue-9)"
@@ -71,13 +73,23 @@ const Select = ({
           backgroundColor: "var(--didicast-blue-9)",
         },
       }),
-      menu: (provided) => ({
-        ...provided,
-        width: width,
-        borderRadius: "4px",
-        boxShadow: " 0 2px 4px 2px rgba(0, 0, 0, 0.1)",
-        backgroundColor: "white",
-      }),
+      // menu: (provided) => ({
+      //   ...(width? {width}: {} ),
+      //   ...provided,
+      //   borderRadius: "4px",
+      //   boxShadow: " 0 2px 4px 2px rgba(0, 0, 0, 0.1)",
+      //   backgroundColor: "white",
+      // }),
+      menu: (provided) => {
+        console.debug({ provided });
+        return {
+          ...provided,
+          ...(width? {width}: {} ),
+          borderRadius: "4px",
+          boxShadow: " 0 2px 4px 2px rgba(0, 0, 0, 0.1)",
+          backgroundColor: "white",
+        };
+      },
       indicatorSeparator: (provided) => ({ ...provided, display: "none" }),
       singleValue: (provided) => ({
         ...provided,
