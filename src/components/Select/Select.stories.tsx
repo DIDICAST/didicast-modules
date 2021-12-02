@@ -78,7 +78,10 @@ export default {
                       options={[
                         { value: "all", label: "전체 보기" },
                         { value: "cls", label: "클래스" },
-                        { value: "pkg", label: "패키지" },
+                        {
+                          value: "pkg",
+                          label: "very very long label",
+                        },
                       ]}
                     />
                   </TableCell>
@@ -126,7 +129,6 @@ W120.args = {
 export const Wauto = Template.bind({});
 Wauto.storyName = "didicastSelect";
 Wauto.args = {
-  width: "auto",
   className: "d-inline-flex flex-column",
   defaultValue: { value: "default1", label: "label1" },
   options: [

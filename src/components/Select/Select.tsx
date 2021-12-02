@@ -38,15 +38,13 @@ const Select = ({
 }: SelectProps) => {
   const selectStyles = useMemo<StylesConfig<object, false, GroupBase<object>>>(
     () => ({
-      
       container: (provided) => ({
         ...provided,
-        ...(width? {width}: {} ),
+        ...(width ? { width } : {}),
         margin: margin,
       }),
       control: (provided, { isFocused }) => ({
         ...provided,
-        
         height: 48,
         paddingLeft: 4,
         borderColor: isFocused ? "var(--didicast-blue)" : "#d0d0d0",
@@ -61,7 +59,6 @@ const Select = ({
       }),
       option: (provided, { data, isDisabled, isFocused, isSelected }) => ({
         ...provided,
-       
         color: "var(--didicast-gray-3)",
         backgroundColor: isSelected
           ? "var(--didicast-blue-9)"
@@ -84,7 +81,7 @@ const Select = ({
         console.debug({ provided });
         return {
           ...provided,
-          ...(width? {width}: {} ),
+          ...(width ? { width } : {}),
           borderRadius: "4px",
           boxShadow: " 0 2px 4px 2px rgba(0, 0, 0, 0.1)",
           backgroundColor: "white",
