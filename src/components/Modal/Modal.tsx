@@ -1,11 +1,12 @@
 import { CModal, CModalBody, CModalFooter, CModalHeader } from "@coreui/react";
 import { makeStyles, Theme, Grid } from "@material-ui/core";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import Button, { Props as ButtonProps } from "../Button/Button";
 
 export type Props = CModal & {
   footer?: ReactNode;
   didicastButtonsInFooter?: ButtonProps[];
+  footerStyle?: CSSProperties;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -65,6 +66,7 @@ const Modal = ({
   title,
   footer,
   didicastButtonsInFooter,
+  footerStyle,
   ...props
 }: Props) => {
   const classes = useStyles();
@@ -82,7 +84,7 @@ const Modal = ({
       {footer || didicastButtonsInFooter ? (
         <CModalFooter className="flex-nowrap">
           {footer || (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} style={footerStyle}>
               {didicastButtonsInFooter!.map((btnProps, idx) => (
                 <Grid key={idx} item xs>
                   <Button {...btnProps} />
