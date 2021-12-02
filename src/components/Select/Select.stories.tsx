@@ -129,6 +129,7 @@ W120.args = {
 export const Wauto = Template.bind({});
 Wauto.storyName = "didicastSelect";
 Wauto.args = {
+  width: "auto",
   className: "d-inline-flex flex-column",
   defaultValue: { value: "default1", label: "label1" },
   options: [
