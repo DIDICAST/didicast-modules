@@ -254,9 +254,9 @@ export default {
                       footerStyle={{ width: "auto" }}
                     >
                       <div className={`text-left mt-1`}>
-                        업로드된 영상을
+                        모달의 내용을
                         <br />
-                        삭제하시겠습니까?
+                        자유롭게 작성하세요.
                       </div>
                     </Template>
                   </TableCell>
@@ -411,7 +411,7 @@ LargeModal.args = {
 
   children: (
     <div>
-      <Typography variant="h4">Children 영역</Typography>
+      <Typography>Children 영역</Typography>
     </div>
   ),
   didicastButtonsInFooter: [
