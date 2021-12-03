@@ -8,14 +8,15 @@ import { ReactComponent as IconExcel } from "./excel-icon.svg";
 
 export type sizeType = "lg" | "sm" | "xs";
 export type Props = CButton & {
+  label: ReactNode;
   paddingSize?: sizeType;
   icon?: string | string[];
   IconComponent?: ReactNode;
   img?: string;
-  label: ReactNode;
+  withExcelIcon?: boolean;
+
   color?: ThemeColorType;
   size?: sizeType;
-  withExcelIcon?: boolean;
 };
 export type Ref = CButton;
 
@@ -174,9 +175,11 @@ const Button = forwardRef<Ref, Props>(
       <>
         <CButton
           innerRef={ref!}
-          className={`d-inline-flex justify-content-center align-items-center ${
-            className || ""
-          } ${classes.button}`}
+          className={`d${
+            !props.block ? "-inline" : ""
+          }-flex justify-content-center align-items-center ${className || ""} ${
+            classes.button
+          }`}
           color={!!withExcelIcon ? "didicast-deepblue-3" : color}
           size={size}
           variant={_variant}
