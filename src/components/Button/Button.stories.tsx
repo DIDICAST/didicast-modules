@@ -167,9 +167,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => (
-  <Button {...args} ref={undefined} />
-);
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = { label: "Default", color: "primary" };
