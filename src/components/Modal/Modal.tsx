@@ -1,11 +1,14 @@
 import { CModal, CModalBody, CModalFooter, CModalHeader } from "@coreui/react";
-import { makeStyles, Theme } from "@material-ui/core";
-import { ReactNode } from "react";
+import { makeStyles, Theme, Grid } from "@material-ui/core";
+import { CSSProperties, ReactNode } from "react";
+import Button, { Props as ButtonProps } from "../Button/Button";
 
 export type Props = CModal & {
   footer?: ReactNode;
-  title?: string;
+  didicastButtonsInFooter?: ButtonProps[];
+  footerStyle?: CSSProperties;
 };
+
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     "& .modal-dialog": {},
@@ -42,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     "& .modal-body": {
       paddingTop: 0,
-      paddingBottom: theme.typography.pxToRem(22),
+      paddingBottom: 0,
       color: "#323237",
       fontSize: theme.typography.pxToRem(20),
       lineHeight: 1.6,
@@ -60,29 +63,38 @@ const Modal = ({
   closeOnBackdrop = false,
   className,
   children,
-  footer,
   title,
+  footer,
+  didicastButtonsInFooter,
+  footerStyle,
   ...props
 }: Props) => {
   const classes = useStyles();
 
   return (
-    <>
-      <CModal
-        {...props}
-        centered={centered}
-        closeOnBackdrop={closeOnBackdrop}
-        className={`${classes.container}${className ? ` ${className}` : ""}`}
-      >
-        <CModalHeader>
-          <div className="d-flex align-items-start">{title}</div>
-        </CModalHeader>
-        <CModalBody>{children}</CModalBody>
-        {footer && (
-          <CModalFooter className="flex-nowrap">{footer}</CModalFooter>
-        )}
-      </CModal>
-    </>
+    <CModal
+      {...props}
+      closeOnBackdrop={closeOnBackdrop}
+      className={`${classes.container}${className ? ` ${className}` : ""}`}
+    >
+      <CModalHeader>
+        <div className="d-flex align-items-start">{title}</div>
+      </CModalHeader>
+      <CModalBody>{children}</CModalBody>
+      {footer || didicastButtonsInFooter ? (
+        <CModalFooter className="flex-nowrap">
+          {footer || (
+            <Grid container spacing={2} style={footerStyle}>
+              {didicastButtonsInFooter!.map((btnProps, idx) => (
+                <Grid key={idx} item xs>
+                  <Button {...btnProps} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </CModalFooter>
+      ) : null}
+    </CModal>
   );
 };
 
