@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Shape</title>
+    <g id="studio1.5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="[STD]-클래스-만들기_설정(등록후)" transform="translate(-1275.000000, -182.000000)" fill="#F15756" fill-rule="nonzero">
+            <g id="Group-22" transform="translate(1275.000000, 176.000000)">
+                <path d="M8.1,17.7 L9.9,17.7 L9.9,19.5 L8.1,19.5 L8.1,17.7 Z M8.1,10.5 L9.9,10.5 L9.9,15.9 L8.1,15.9 L8.1,10.5 Z M8.991,6 C4.023,6 0,10.032 0,15 C0,19.968 4.023,24 8.991,24 C13.968,24 18,19.968 18,15 C18,10.032 13.968,6 8.991,6 Z M9,22.2 C5.022,22.2 1.8,18.978 1.8,15 C1.8,11.022 5.022,7.8 9,7.8 C12.978,7.8 16.2,11.022 16.2,15 C16.2,18.978 12.978,22.2 9,22.2 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
