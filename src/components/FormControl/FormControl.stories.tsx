@@ -20,7 +20,7 @@ export default {
   component: FormControl,
   argTypes: {
     name: {
-      type: { required: true },
+      type: { name: "string", required: true },
       description: `The name of this form control`,
     },
     componentType: {
@@ -28,28 +28,27 @@ export default {
       control: { type: "select" },
     },
     handleBlur: {
-      type: { required: true },
+      type: { name: "function", required: true },
       description: `(*formik에서 반드시 넘겨받아야할 prop*)`,
     },
     handleChange: {
-      type: { required: true },
+      type: { name: "function", required: true },
       description: `(*formik에서 반드시 넘겨받아야할 prop*)`,
     },
     values: {
-      type: { required: true },
+      type: { name: "object", required: true, value: {} },
       description: `(*formik에서 반드시 넘겨받아야할 prop*)`,
     },
     errors: {
-      type: { required: true },
+      type: { name: "object", required: true, value: {} },
       description: `(*formik에서 반드시 넘겨받아야할 prop*)`,
     },
     touched: {
-      type: { required: true },
+      type: { name: "object", required: true, value: {} },
       description: `(*formik에서 반드시 넘겨받아야할 prop*)`,
     },
-    ref: { type: {}, description: `validation 과정에서 필요한 focus 참조` },
+    ref: { description: `validation 과정에서 필요한 focus 참조` },
     helpText: {
-      type: {},
       description: `기본적으로 표시되는 안내 문구`,
       control: { type: "text" },
     },

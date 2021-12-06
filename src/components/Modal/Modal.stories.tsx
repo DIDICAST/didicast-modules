@@ -159,7 +159,7 @@ export default {
                         <Typography variant="body1">
                           클래스에 사용할 영상을 아직 업로드 하지 않으셨나요?
                           <br />
-                          <a href="#">영상 클라우드로 이동</a>
+                          <a href="#void">영상 클라우드로 이동</a>
                         </Typography>
                       </div>
                     </Template>
