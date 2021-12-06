@@ -15,7 +15,6 @@ import {
   PRIMARY_STORY,
 } from "@storybook/addon-docs";
 import { Meta, Story } from "@storybook/react";
-import { AutoClose } from "../Modal/Modal.stories";
 import Select, { SelectProps } from "./Select";
 
 export default {
