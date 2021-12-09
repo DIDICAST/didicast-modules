@@ -1,7 +1,6 @@
 import { CContainer, CDataTable, CPagination } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
-import { useMemo } from "@storybook/addons";
-import { forwardRef } from "react";
+import { useMemo } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -78,18 +77,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export type TableProps = CDataTable & {
-  noItemText?: string;
-  pagination: object;
-  sortingMode?: string;
-};
+export type TableProps = CDataTable &
+  CPagination & {
+    sortingMode?: string;
+    fields: any[] | undefined;
+    items: any[] | undefined;
+    pagination: any | undefined;
+    changePaginations: Function;
+    noItemText?: string;
+  };
 
 const Table = ({
-  noItemText = "데이터가 없습니다.",
   fields = [],
   items = [],
-  pagination,
-  sorter,
+  pagination = {
+    itemsPerPage: 10,
+    activePage: 0,
+    sortModel: { column: null, asc: false },
+    filterModel: { items: [] },
+  },
+  changePaginations,
+  noItemText = "데이터가 없습니다.",
+  sorter = false,
   sorterValue,
   sortingMode,
   onSorterValueChange,
@@ -98,54 +107,87 @@ const Table = ({
 }: TableProps) => {
   const classes = useStyles();
 
-  // const sortingProps = useMemo(() => {
-  //   if (onSorterValueChange) {
-  //     const additionalProps = { scopedSlots };
+  const sortingProps = useMemo(() => {
+    if (onSorterValueChange) {
+      return {
+        onSorterValueChange,
+        sorter: sorter,
+        sorterValue: sorterValue || pagination.sortModel,
+        sortingIconSlot: (target: any, next: any) => {
+          return (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              className={`${next[0]} ${next[1]} ${next[2]} ${next[3]} ${next[4]} bi bi-arrow-up`}
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+              />
+            </svg>
+            // <Icons.BsArrowUp
+            //   style={{ fontSize: "20px" }}
+            //   className={`${next[0]} ${next[1]} ${next[2]} ${next[3]} ${next[4]}`}
+            // />
+          );
+        },
+      };
+    }
+    return {};
+  }, [
+    onSorterValueChange,
+    sorter,
+    sorterValue,
+    // sortingMode,
+    pagination.sortModel,
+  ]);
 
-  //     if (sortingMode !== "client") {
-  //       const keys = fields.reduce((acc, cur) => {
-  //         if (cur.sorter !== false) {
-  //           acc.push(cur.key);
-  //         }
-  //         return acc;
-  //       }, []);
-  //       additionalProps.scopedSlots = {
-  //         ...scopedSlots,
-  //         ...keys.reduce((acc, cur) => {
-  //           if (scopedSlots[cur] === undefined) {
-  //             acc[cur] = (item, index) => (
-  //               <td key={index}>{item[`${cur}ForSorter`]}</td>
-  //             );
-  //           }
-  //           return acc;
-  //         }, {}),
-  //       };
-  //       additionalProps.items = items.list.map((item) => ({
-  //         ...item,
-  //         ...keys.reduce((acc, cur) => {
-  //           acc[`${cur}ForSorter`] = item[cur];
-  //           acc[cur] = "";
-  //           return acc;
-  //         }, {}),
-  //       }));
-  //     }
-  // };
+  const pageCount = useMemo(() => {
+    return Math.ceil(items.length / pagination.itemsPerPage);
+  }, [items.length, pagination.itemsPerPage]);
 
   return (
     <CContainer className={classes.container}>
       <CDataTable
         items={items}
         fields={fields}
-        scopedSlots={scopedSlots}
+        itemsPerPage={pagination.itemsPerPage}
+        activePage={pagination.activePage + 1}
         noItemsViewSlot={
           <div className={classes["no-items"]}>
             <span className="pr-2">🤭</span>
             {noItemText}
           </div>
         }
+        onPaginationChange={(pageSize: any) => {
+          const params = [{ type: "itemsPerPage", payload: pageSize }];
+          if (pageSize * (pagination.activePage + 1) > items.length) {
+            params.push({
+              type: "activePage",
+              payload: Math.ceil(items.length / pageSize) - 1,
+            });
+          }
+          changePaginations(params);
+        }}
+        scopedSlots={scopedSlots}
         {...props}
-      ></CDataTable>
-      {/* <CPagination/> */}
+        {...sortingProps}
+      />
+      {pagination && pageCount > 1 && (
+        <CPagination
+          className={`my-3`}
+          dots={false}
+          doubleArrows={false}
+          activePage={pagination.activePage + 1}
+          pages={pagination.itemsPerPage ? pageCount : 0}
+          onActivePageChange={(v: any) => {
+            changePaginations("activePage", v - 1);
+          }}
+        />
+      )}
     </CContainer>
   );
 };
