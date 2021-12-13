@@ -4,9 +4,9 @@ import { makeStyles, Theme } from "@material-ui/core";
 import React, { forwardRef, ReactNode, useMemo } from "react";
 
 import { ThemeColorType } from "../../styles/palette";
+import { sizeType } from "..";
 import { ReactComponent as IconExcel } from "./excel-icon.svg";
 
-export type sizeType = "lg" | "sm" | "xs";
 export type Props = CButton & {
   label: ReactNode;
   paddingSize?: sizeType;
