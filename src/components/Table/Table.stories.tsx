@@ -213,8 +213,8 @@ const items = [
   {
     mbr_no: "2671",
     user_no: "3137",
-    username: "나루미1",
-    name: "나루미1",
+    username: "나루미3",
+    name: "나루미3",
     email: "lumi1@didicast.com",
     phone_num: "01012341234",
     org_nm: "산타1",
@@ -239,8 +239,8 @@ const items = [
   {
     mbr_no: "2671",
     user_no: "3137",
-    username: "나루미3",
-    name: "나루미3",
+    username: "나루미",
+    name: "나루미8",
     email: "lumi3@didicast.com",
     phone_num: "01012341234",
     org_nm: "산타3",
@@ -252,8 +252,8 @@ const items = [
   {
     mbr_no: "2671",
     user_no: "3137",
-    username: "나루미4",
-    name: "나루미4",
+    username: "나루미1",
+    name: "나루미1",
     email: "lumi4@didicast.com",
     phone_num: "01012341234",
     org_nm: "산타4",
@@ -435,7 +435,6 @@ const Scoped: Story<TableProps> = () => {
   return (
     <>
       <Table
-        sorter={true}
         items={scItem}
         fields={fields_sc}
         columnHeaderSlot={{
@@ -537,6 +536,7 @@ const Sorters: Story<TableProps> = () => {
   );
   const onSorterValueChange = useCallback(
     (target) => {
+      // console.log({ target });
       changePaginations("sorter", target);
     },
     [changePaginations]

@@ -77,15 +77,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export type TableProps = CDataTable &
-  CPagination & {
-    sortingMode?: string;
-    fields: any[] | undefined;
-    items: any[] | undefined;
-    pagination: any | undefined;
-    changePaginations: Function;
-    noItemText?: string;
-  };
+export type TableProps = CDataTable & {
+  sortingMode?: string;
+  fields: any[] | undefined;
+  items: any[] | undefined;
+  pagination?: any | undefined;
+  changePaginations?: Function;
+  noItemText?: string;
+};
 
 const Table = ({
   fields = [],
@@ -96,7 +95,7 @@ const Table = ({
     sortModel: { column: null, asc: false },
     filterModel: { items: [] },
   },
-  changePaginations,
+  changePaginations = () => {},
   noItemText = "데이터가 없습니다.",
   sorter = false,
   sorterValue,
@@ -111,7 +110,7 @@ const Table = ({
     if (onSorterValueChange) {
       return {
         onSorterValueChange,
-        sorter: sorter,
+        sorter: sorter && { external: false, resetable: true },
         sorterValue: sorterValue || pagination.sortModel,
         sortingIconSlot: (target: any, next: any) => {
           return (
