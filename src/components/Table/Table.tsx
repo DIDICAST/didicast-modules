@@ -55,17 +55,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
     },
     "& .page-item": {
+      "& .page-link": {
+        lineHeight: "initial",
+        fontWeight: 200,
+        padding: "8px 8px",
+      },
       "&.active .page-link": {
         borderRadius: "50%",
         backgroundColor: "var(--didicast-blue)",
         color: "white",
+        width: "32px",
+        height: "32px",
+        padding: "8px 12px",
+        fontWeight: 500,
       },
       "& .page-link, &.disabled .page-link ": {
         border: "unset",
         color: "#000000",
         backgroundColor: "unset",
         borderColor: "unset",
-        fontWeight: 100,
       },
     },
   },
@@ -95,7 +103,7 @@ const Table = ({
     sortModel: { column: null, asc: false },
     filterModel: { items: [] },
   },
-  changePaginations = () => {},
+  changePaginations = undefined,
   noItemText = "데이터가 없습니다.",
   sorter = false,
   sorterValue,
@@ -179,7 +187,8 @@ const Table = ({
         <CPagination
           className={`my-3`}
           dots={false}
-          doubleArrows={false}
+          arrows={false}
+          // doubleArrows={false}
           activePage={pagination.activePage + 1}
           pages={pagination.itemsPerPage ? pageCount : 0}
           onActivePageChange={(v: any) => {
