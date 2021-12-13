@@ -4,6 +4,7 @@ export { default as Select } from "./Select";
 export { default as Modal } from "./Modal";
 export { default as Tooltip } from "./Tooltip";
 export { default as Title } from "./Title";
+export { default as DatePicker } from "./DatePicker";
 
 export const sizes = ["lg", "sm", "xs"] as const;
 export type sizeType = typeof sizes[number];
