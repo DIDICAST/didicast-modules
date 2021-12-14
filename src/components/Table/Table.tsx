@@ -55,7 +55,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
     },
     "& .page-item": {
+      "&:first-child, &:last-child": {
+        "& .page-link": {
+          padding: "0 8px",
+          fontSize: "25px",
+          fontWeight: 100,
+        },
+      },
       "& .page-link": {
+        "&:focus": {
+          boxShadow: "none",
+        },
         lineHeight: "initial",
         fontWeight: 200,
         padding: "8px 8px",
