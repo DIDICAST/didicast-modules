@@ -1,6 +1,6 @@
 import { CContainer, CDataTable, CPagination } from "@coreui/react";
 import { makeStyles, Theme } from "@material-ui/core";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -76,8 +76,11 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: "white",
         width: "32px",
         height: "32px",
-        padding: "8px 12px",
+        padding: "7px 12px",
         fontWeight: 500,
+      },
+      "&.disabled": {
+        opacity: "0.4",
       },
       "& .page-link, &.disabled .page-link ": {
         border: "unset",
@@ -113,7 +116,7 @@ const Table = ({
     sortModel: { column: null, asc: false },
     filterModel: { items: [] },
   },
-  changePaginations = undefined,
+  changePaginations,
   noItemText = "데이터가 없습니다.",
   sorter = false,
   sorterValue,
@@ -162,6 +165,31 @@ const Table = ({
     pagination.sortModel,
   ]);
 
+  const onActivePageChange = useCallback(
+    (value: any) => {
+      if (changePaginations) {
+        changePaginations("activePage", value - 1);
+      }
+    },
+    [changePaginations]
+  );
+
+  const onPaginationChange = useCallback(
+    (pageSize: any) => {
+      if (changePaginations) {
+        const params = [{ type: "itemsPerPage", payload: pageSize }];
+        if (pageSize * (pagination.activePage + 1) > items.length) {
+          params.push({
+            type: "activePage",
+            payload: Math.ceil(items.length / pageSize) - 1,
+          });
+        }
+        changePaginations(params);
+      }
+    },
+    [changePaginations]
+  );
+
   const pageCount = useMemo(() => {
     return Math.ceil(items.length / pagination.itemsPerPage);
   }, [items.length, pagination.itemsPerPage]);
@@ -179,21 +207,12 @@ const Table = ({
             {noItemText}
           </div>
         }
-        onPaginationChange={(pageSize: any) => {
-          const params = [{ type: "itemsPerPage", payload: pageSize }];
-          if (pageSize * (pagination.activePage + 1) > items.length) {
-            params.push({
-              type: "activePage",
-              payload: Math.ceil(items.length / pageSize) - 1,
-            });
-          }
-          changePaginations(params);
-        }}
+        onPaginationChange={onPaginationChange}
         scopedSlots={scopedSlots}
         {...props}
         {...sortingProps}
       />
-      {pagination && pageCount > 1 && (
+      {pagination && pageCount > 0 && (
         <CPagination
           className={`my-3`}
           dots={false}
@@ -201,9 +220,7 @@ const Table = ({
           // doubleArrows={false}
           activePage={pagination.activePage + 1}
           pages={pagination.itemsPerPage ? pageCount : 0}
-          onActivePageChange={(v: any) => {
-            changePaginations("activePage", v - 1);
-          }}
+          onActivePageChange={onActivePageChange}
         />
       )}
     </CContainer>
