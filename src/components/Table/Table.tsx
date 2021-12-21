@@ -187,7 +187,7 @@ const Table = ({
         changePaginations(params);
       }
     },
-    [changePaginations]
+    [items.length, pagination.activePage, changePaginations]
   );
 
   const pageCount = useMemo(() => {

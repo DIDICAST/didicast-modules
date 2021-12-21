@@ -3,9 +3,12 @@
     "@coreui/coreui",
     "@coreui/react",
     "@coreui/icons-react",
+    "@storybook/preset-create-react-app",
     "eslint",
-    "react-router-dom",
+    "eslint-config-react-app",
     "node-sass",
+    "react-router-dom",
+    "react-scripts",
     "stylelint"
   ]
 }
