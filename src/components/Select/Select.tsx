@@ -13,11 +13,11 @@ export type SelectProps = {
   width?:
     | (string | (string & {}))[]
     | Property.Width<string | number>
-    | (Property.Width<string | number> | undefined)[];
+    | Property.Width<string | number>[];
   margin?:
     | (string | (string & {}))[]
     | Property.Margin<string | number>
-    | (Property.Margin<string | number> | undefined)[];
+    | Property.Margin<string | number>[];
   value?: PropsValue<object>;
   defaultValue?: PropsValue<object>;
   className?: string;
