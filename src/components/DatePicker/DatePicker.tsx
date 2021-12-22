@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from "@material-ui/core";
 import { DateTime } from "luxon";
 import ReactDatePicker from "react-date-picker";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactElement } from "react";
 const useStyles = makeStyles((theme: Theme) => ({
   date: {
     "& .react-date-picker__wrapper": {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(1),
     },
     "& .react-date-picker__inputGroup": {
-      //   minWidth: 0,
+      minWidth: 0,
       paddingTop: theme.spacing(1),
       paddingRight: theme.typography.pxToRem(10),
       paddingBottom: theme.spacing(1),
@@ -123,6 +123,8 @@ export type Props = {
   backgroundColor?: boolean;
   invalid?: boolean;
   onChange?: (value: Date, event: ChangeEvent<HTMLInputElement>) => void;
+  icon?: ReactElement | null;
+  format?: string;
 };
 
 const maxDate = DateTime.fromISO("2999-12-31");
@@ -133,14 +135,15 @@ const DatePicker = ({
   disabled,
   backgroundColor = false,
   invalid = false,
+  icon = <>📆</>,
+  format = "yyyy.M.dd",
 }: Props) => {
   const classes = useStyles({ disabled, backgroundColor, invalid } as Props);
 
   const datePickerProps = {
-    // calenderIcon: <>📆</>,
     className: `${classes.date}`,
     clearIcon: null,
-    format: "yyyy.M.dd",
+    format: format,
     showLeadingZeros: true,
     showNeighboringMonth: false,
   };
@@ -161,7 +164,7 @@ const DatePicker = ({
           }
           value={date}
           disabled={disabled}
-          calendarIcon={<>📆</>}
+          calendarIcon={icon}
           {...datePickerProps}
         />
       </div>
