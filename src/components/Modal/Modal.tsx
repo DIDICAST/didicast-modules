@@ -75,6 +75,7 @@ const Modal = ({
     <CModal
       {...props}
       closeOnBackdrop={closeOnBackdrop}
+      centered={centered}
       className={`${classes.container}${className ? ` ${className}` : ""}`}
     >
       <CModalHeader>
