@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Modal = ({
-  centered,
   closeOnBackdrop = false,
   className,
   children,
