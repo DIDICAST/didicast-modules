@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Modal = ({
-  centered,
   closeOnBackdrop = false,
   className,
   children,
@@ -75,7 +74,6 @@ const Modal = ({
     <CModal
       {...props}
       closeOnBackdrop={closeOnBackdrop}
-      centered={centered}
       className={`${classes.container}${className ? ` ${className}` : ""}`}
     >
       <CModalHeader>
