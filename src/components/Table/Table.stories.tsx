@@ -308,6 +308,7 @@ export default {
                 <TableRow>
                   <Table
                     items={items}
+                    total={items.length}
                     fields={originFields}
                     scopedSlots={{
                       more: ({ item, index }: any) => (
@@ -346,6 +347,7 @@ export const Default = Template.bind({});
 Default.args = {
   fields: originFields,
   items: items,
+  total: items.length,
 };
 
 const Scoped: Story<TableProps> = () => {
@@ -436,6 +438,7 @@ const Scoped: Story<TableProps> = () => {
     <>
       <Table
         items={scItem}
+        total={scItem.length}
         fields={fields_sc}
         columnHeaderSlot={{
           checkbox: [
@@ -546,6 +549,7 @@ const Sorters: Story<TableProps> = () => {
       <Table
         sorter={true}
         items={items}
+        total={items.length}
         fields={originFields}
         pagination={pagination}
         changePaginations={changePaginations}
@@ -592,6 +596,7 @@ const PaginationTemplate: Story<TableProps> = () => {
     <>
       <Table
         items={moreItems}
+        total={moreItems.length}
         fields={originFields}
         pagination={pagination}
         changePaginations={changePaginations}
