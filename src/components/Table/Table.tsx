@@ -102,6 +102,7 @@ export type TableProps = CDataTable & {
   sortingMode?: string;
   fields: any[] | undefined;
   items: any[] | undefined;
+  total: number;
   pagination?: any | undefined;
   changePaginations?: Function;
   noItemText?: string;
@@ -110,6 +111,7 @@ export type TableProps = CDataTable & {
 const Table = ({
   fields = [],
   items = [],
+  total,
   pagination = {
     itemsPerPage: 10,
     activePage: 0,
@@ -178,21 +180,21 @@ const Table = ({
     (pageSize: any) => {
       if (changePaginations) {
         const params = [{ type: "itemsPerPage", payload: pageSize }];
-        if (pageSize * (pagination.activePage + 1) > items.length) {
+        if (pageSize * (pagination.activePage + 1) > total) {
           params.push({
             type: "activePage",
-            payload: Math.ceil(items.length / pageSize) - 1,
+            payload: Math.ceil(total / pageSize) - 1,
           });
         }
         changePaginations(params);
       }
     },
-    [items.length, pagination.activePage, changePaginations]
+    [total, pagination.activePage, changePaginations]
   );
 
   const pageCount = useMemo(() => {
-    return Math.ceil(items.length / pagination.itemsPerPage);
-  }, [items.length, pagination.itemsPerPage]);
+    return Math.ceil(total / pagination.itemsPerPage);
+  }, [total, pagination.itemsPerPage]);
 
   return (
     <CContainer className={classes.container}>
