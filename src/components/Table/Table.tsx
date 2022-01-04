@@ -105,7 +105,7 @@ export type TableProps = CDataTable & {
   total: number;
   pagination?: any | undefined;
   changePaginations?: Function;
-  noItemText?: string;
+  noItemText?: string | null;
 };
 
 const Table = ({
@@ -204,10 +204,14 @@ const Table = ({
         itemsPerPage={pagination.itemsPerPage}
         activePage={pagination.activePage + 1}
         noItemsViewSlot={
-          <div className={classes["no-items"]}>
-            <span className="pr-2">🤭</span>
-            {noItemText}
-          </div>
+          noItemText ? (
+            <div className={classes["no-items"]}>
+              <span className="pr-2">🤭</span>
+              {noItemText}
+            </div>
+          ) : (
+            <></>
+          )
         }
         onPaginationChange={onPaginationChange}
         scopedSlots={scopedSlots}

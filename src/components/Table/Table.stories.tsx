@@ -295,6 +295,12 @@ const originFields = [
 export default {
   title: "Components/Table",
   component: Table,
+  argTypes: {
+    noItemText: {
+      description:
+        "데이터가 없을 경우 보여주는 문자열 (null이 할당된 경우 아무 것도 나타나지 않게 됨)",
+    },
+  },
   parameters: {
     docs: {
       page: () => (
